@@ -1,8 +1,8 @@
-#include <Steelsquid.h>
+#include <JOLT.h>
 #include <FeatherRfm9X.h>
 #include <FeatherwingHttpServer.h>
 
-#define FREQUENCY 434.0
+#define FREQUENCY 915.0
 #define DEVICE_ADDRESS 67
 #define TO_ADDRESS 66
 
@@ -25,8 +25,8 @@ void loop() {
     int packageType = rfm9X.receive();
     if(packageType == TYPE_BYTES && rfm9X.lastRxLength()==17){
       byte* buffer = rfm9X.receivedBytes();
-      double latitude = Steelsquid::toDouble(buffer, 0);
-      double longitude = Steelsquid::toDouble(buffer, 8);
+      double latitude = JOLT::toDouble(buffer, 0);
+      double longitude = JOLT::toDouble(buffer, 8);
 
       String bat = String(buffer[16]);
       String snr = String(rfm9X.lastSnr());
